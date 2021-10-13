@@ -13,7 +13,6 @@ app.use(Express.json());
 app.use(Cors());
 app.use(rutasProducto);
 
-
 const main = () => {
     return app.listen(process.env.PORT, () => {
         console.log(`Escuchando puert ${process.env.PORT}`);
