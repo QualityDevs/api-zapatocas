@@ -1,27 +1,29 @@
-const { MongoClient } = require('mongodb');
-const connectionString = process.env.ATLAS_URI;
-const client = new MongoClient(connectionString, {
+import dotenv from 'dotenv';
+import {MongoClient} from 'mongodb';
+
+
+dotenv.config({ path: './config.env'});
+const stringConexion = process.env.DATABASE_URL;
+const client = new MongoClient(stringConexion, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
-let dbConnection;
+let BaseDatos;
 
-module.exports = {
-  connectToServer: function (callback) {
-    client.connect(function (err, db) {
-      if (err || !db) {
-        return callback(err);
-      }
+const conectarBD = (callback) => {
+  client.connect((err, db) => {
+    if (err) {
+        console.error('Error al conectarse con la base de datos');
+    }
+    BaseDatos = db.db('tienda');
+    console.log('Conectado con la base de datos');
+  return callback();
+});
+}
 
-      dbConnection = db.db('tienda');
-      console.log('Successfully connected to MongoDB.');
-
-      return callback();
-    });
-  },
-
-  getDb: function () {
-    return dbConnection;
-  },
+const getDB = () =>{
+   return BaseDatos;
 };
+
+export {conectarBD, getDB};
