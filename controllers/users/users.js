@@ -19,7 +19,6 @@ const user = jwt_decode(token)['http://localhost/userData'];
   await baseDeDatos.collection('usuarios').findOne({ email: user.email }, async (err, response) => {
     console.log('response consulta bd', response);
     if (response) {
-      // 7.1. si el usuario ya esta en la BD, devuelve la info del usuario
       callback(err, response);
     } else {
       // 7.2. si el usuario no esta en la bd, lo crea y devuelve la info
