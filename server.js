@@ -4,6 +4,7 @@ import { conectarBD } from './db/conn.js';
 import dotenv from 'dotenv';
 import rutasProducto from './rutes/producto.js';
 import rutasUser from './rutes/usuarios.js';
+import rutasSales from './rutes/ventas.js';
 import jwt from 'express-jwt';
 import jwks from 'jwks-rsa'; 
 
@@ -30,7 +31,8 @@ var jwtCheck = jwt({
 app.use(jwtCheck);
 
 app.use(rutasProducto);
-app.use(rutasUser)
+app.use(rutasUser);
+app.use(rutasSales);
 
 const main = () => {
     return app.listen(puerto, () => {

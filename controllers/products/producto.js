@@ -27,6 +27,7 @@ const deleteProduct = async (dataProduct, callback) => {
     delete dataProduct.id;
     const operacion ={ $set: dataProduct};
     getDB().collection('productos').deleteOne(filtro, operacion, callback);
+    console.log('Eliminado');
 }
 
 
