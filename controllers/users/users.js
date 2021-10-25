@@ -7,13 +7,7 @@ const queryAllUsers = async (callback) => {
 }
 
 const createUser = async (dataUser, callback) => {
-    if (Object.keys(dataUser).includes('nombre') && Object.keys(dataUser).includes('estado') &&
-        Object.keys(dataUser).includes('rol')) {
-        getDB().collection('usuarios').insertOne(dataUser, callback);
-    } else {
-        return "error";
-    }
-
+    await getDB().collection('usuarios').insertOne(dataUser, callback);
 }
 
 const consultarOcrearUsuario = async(req, callback)=>{
