@@ -26,7 +26,7 @@ const user = jwt_decode(token)['http://localhost/userData'];
       user.auth0ID = user._id;
       delete user._id;
       user.rol = 'sin rol';
-      //user.estado = 'pendiente';
+      user.estado = 'pendiente';
       await createUser(user, (err, respuesta) => callback(err, user));
     }
   });
